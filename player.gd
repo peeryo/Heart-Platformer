@@ -28,9 +28,9 @@ func handle_jump():
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = JUMP_VELOCITY
-		else:
-			if Input.is_action_just_released("ui_up") and velocity.y < JUMP_VELOCITY / 2:
-				velocity.y = JUMP_VELOCITY / 2 	
+	else:
+		if Input.is_action_just_released("ui_up") and velocity.y < JUMP_VELOCITY / 2:
+			velocity.y = JUMP_VELOCITY / 2 	
 				
 func handle_acceleration(input_axis, delta):
 	if input_axis != 0:
