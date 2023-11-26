@@ -3,3 +3,5 @@ res://DefaultMovementData.tres
 res://player.tscn
 res://PlayerMovementData.gd
 res://player.gd
+res://spikes.tscn
+res://hazard_area.tscn
