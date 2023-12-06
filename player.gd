@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
 @export var movement_data : PlayerMovementData
-
+ 
 var air_jump = false
 var just_wall_jumped = false
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+#var was_wall_normal = Vector2.ZERO
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var starting_position = global_position
+#@onready var wall_jump_timer = $WallJumpTimer
 
 
 func _physics_process(delta):
@@ -21,14 +22,14 @@ func _physics_process(delta):
 	handle_air_acceleration(input_axis, delta)	
 	apply_friction(input_axis, delta)
 	apply_air_resistance(input_axis, delta)
+	#this should move to bottom of physics process
 	update_animations(input_axis)
 	var was_on_floor = is_on_floor()
-	just_wall_jumped = false
-	
 	move_and_slide()
 	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_ledge:
 		coyote_jump_timer.start()
+	just_wall_jumped = false
 	
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -53,7 +54,7 @@ func handle_jump():
 			velocity.y = movement_data.jump_velocity / 2
 			
 		if Input.is_action_just_pressed("ui_up") and air_jump and not just_wall_jumped:
-			movement_data.jump_velocity * 0.8
+			velocity.y = movement_data.jump_velocity * 0.8
 			air_jump = false
 				
 func handle_acceleration(input_axis, delta):
@@ -83,8 +84,6 @@ func update_animations(input_axis):
 		
 	if not is_on_floor():
 		animated_sprite_2d.play("jump")
-	
-
 
 func _on_hazard_detector_area_entered(area):
 	global_position = starting_position
