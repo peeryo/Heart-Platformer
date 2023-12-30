@@ -10,7 +10,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var starting_position = global_position
-#@onready var wall_jump_timer = $WallJumpTimer
 
 
 func _physics_process(delta):
