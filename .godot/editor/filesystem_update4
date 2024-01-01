@@ -1,5 +1,2 @@
-res://player.tscn
+res://level_one.tscn
 res://DefaultMovementData.tres
-res://world.tscn
-res://level_transition.tscn
-res://player.gd
